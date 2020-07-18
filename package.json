@@ -1,0 +1,36 @@
+{
+  "name": "issue-tracker-app",
+  "author": "thetradecoder",
+  "version": "0.0.1",
+  "description": "Issue Tracket App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "mongodb": "^3.5.9",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.0.1",
+    "zombie": "^6.1.4",
+    "helmet": "^3.23.3",
+    "shortid": "^2.2.15",
+    "express-robots-txt": "^0.4.1"
+  },
+  "engines": {
+    "node": "4.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://glitch.com/edit/#!/fcc-issue-tracker-thetradecoder"
+  },
+  "keywords": [
+    "node",
+    "thetradecoder",
+    "express"
+  ],
+  "license": "MIT"
+}

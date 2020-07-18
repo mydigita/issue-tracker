@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Issue Tracker</title>
+    <link rel="alternate" title="Sitemap" hreflang="en" href="https://fcc-issue-tracker-thetradecoder.glitch.me/apitest" />
+    <link rel="alternate" title="Sitemap" hreflang="en" href="https://fcc-issue-tracker-thetradecoder.glitch.me/sitemap.xml" />
+    <meta name="description" content="issue tracker">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://fcc-issue-tracker-thetradecoder.glitch.me/sitemap.xml" />
+       
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="../public/style.css">
+    
+  </head>
+  <body>
+    <section class="container">
+    <header>
+      <h1 id="projectTitle" class="text-center">.</h1>
+      
+    </header>
+      <div id="submitNewIssue">
+        <p>** To view other project issues- enter your project in the address bar</p>
+        <br>
+        <a href="https://fcc-issue-tracker-thetradecoder.glitch.me/" class="btn btn-info">Home</a>
+        <button data-toggle="collapse" data-target="#newIssue" class="btn btn-primary">Submit new issue</button>
+        <a href="https://fcc-issue-tracker-thetradecoder.glitch.me/" class="btn btn-warning">Update issue</a>
+        <br>
+        <br>
+        
+        <form id="newIssue" method="post" action="/api/" class="collapse">
+          <div class="form-group">
+          <label for ="new_issue_title">Issue title:</label>
+          <input id="new_issue_title" type="text" name="issue_title" placeholder="*Title" class="form-control" required="">
+          </div>
+          
+          
+          <div class="form-group">
+          <label for="new_issue_text">Issue text:</label>
+          <textarea id="new_issue_text" name="issue_text" placeholder="*Text" class="form-control" rows="5" required=""></textarea>
+          </div>
+          
+          <div class="form-row">
+          <div class="form-group col">
+          <label for="new_created_by">Created by:</label>
+          <input id="new_created_by" type="text" name="created_by" placeholder="*Created by" class="form-control" required="">
+          </div>
+          
+          <div class="form-group col">
+          <label for="new_assigned_to">Assigned To:</label>
+          <input id="new_assigned_to" type="text" name="assigned_to" placeholder="(opt)Assigned to" class="form-control">
+          </div>
+          
+          <div class="form-group col">
+          <label for="new_status_text">Status text:</label>
+          <input id="new_status_text" type="text" name="status_text" placeholder="(opt)Status text" class="form-control">
+          </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Issue</button>
+        </form>
+        
+      </div>
+      <hr>
+      <div id="issueDisplay"></div>
+      
+      <footer>
+      </footer>
+      
+    </section>
+
+    
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+        var currentProject = window.location.pathname.replace(/\//g, "");;
+        var url = "/api/issues/"+currentProject;
+        $('#projectTitle').html('All issues for: <code>'+currentProject+'</code>');
+        
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function(data){
+            let result = JSON.stringify(data)       
+            
+            var issues= [];
+            data.forEach(function(ele) {
+              console.log(ele);
+              var openstatus;
+              (ele.open) ? openstatus = 'open' : openstatus = 'closed';
+              let close;
+              (ele.open) ? close = 'Close' : close = "";
+              
+              
+              var single = [
+                '<div class="issue shadow '+openstatus+'">',                
+                '<h3>'+ele.issue_title+' -  ('+openstatus+')</h3>',
+                '<p class="id"><b>Issue id#</b> '+ele._id+'</p>',
+                '<br>',
+                '<p>'+ele.issue_text+'</p>',
+                '<p>'+ele.status_text+'</p>',
+                '<br>',
+                '<p class="id"><b>Created by:</b> '+ele.created_by+'  <b>Assigned to:</b> '+ele.assigned_to,
+                '<p class="id"><b>Created on:</b> '+new Date(ele.created_on).toDateString()+'  <b>Last updated:</b> '+new Date(ele.updated_on).toDateString(),
+                '<br><br><a href="#" class="closeIssue" id="'+ele._id+'">'+close+'</a> <a href="#" class="deleteIssue" id="'+ele._id+'">Delete</a>',
+                '</div>'
+                
+              ];
+              issues.push(single.join(''));
+              
+            });
+      
+           $('#issueDisplay').html(issues.join('')); 
+           
+          }
+        });
+        
+        
+        
+        
+        
+        $('#newIssue').submit(function(e){
+          e.preventDefault();
+          $(this).attr('action', "/api/issues/" + currentProject);
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize(),
+            success: function(data) { window.location.reload(true); console.log(data) }
+          });
+        });
+        
+        
+        
+        
+        $('#issueDisplay').on('click','.closeIssue', function(e) {
+          var url = "/api/issues/"+currentProject;
+          $.ajax({
+            type: "PUT",
+            url: url,
+            data: {_id: $(this).attr('id'), open: false},
+            success: function(data) { alert("Issue has been closed!"); window.location.reload(true); }            
+          });
+          e.preventDefault();
+        });
+        
+        
+        
+        
+        $('#issueDisplay').on('click','.deleteIssue', function(e) {
+          var url = "/api/issues/"+currentProject;
+          $.ajax({
+            type: "DELETE",
+            url: url,
+            data: {_id: $(this).attr('id')},
+            success: function(data) { alert("Issue has been deleted!"); window.location.reload(true); }
+            
+          });
+          e.preventDefault();
+        });
+      });
+   </script>
+  </body>
+</html>
