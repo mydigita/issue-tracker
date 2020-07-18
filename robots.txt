@@ -1,0 +1,4 @@
+UserAgent: '*',
+CrawlDelay: '5', 
+Sitemap:'https://fcc-issue-tracker-thetradecoder.glitch.me/sitemap.xml',
+Sitemap:'https://fcc-issue-tracker-thetradecoder.glitch.me/robots.txt'

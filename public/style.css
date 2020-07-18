@@ -1,0 +1,79 @@
+:root {  
+  box-sizing:border-box;
+}
+*{
+  color:#333333;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+header{
+  padding-top:2rem;
+  padding-bottom:1rem;
+}
+
+.open, .closed{
+  margin: 1rem 0 1rem 0;
+  padding:1rem;
+  border-radius:10px;
+}
+
+.open h3{
+  color:blue;
+}
+.closed {
+  color:gray;
+}
+.warning:hover{
+ background-color:darkorange;
+  color:white;
+}
+.danger:hover{
+  background-color:crimson;
+  color:white;
+}
+.primary:hover{
+  background-color:dodgerblue;
+  color:white;
+}
+.id{
+  color:gray;
+}
+.closeIssue, .deleteIssue{
+  font-size:1.3rem;
+}
+.closeIssue{
+  float:left;
+  color:darkorange;
+}
+.deleteIssue{
+  float:right;
+  color:crimson;
+}
+.issue{
+  padding-bottom:1.5rem;
+}
+
+code{
+  color: #b11030;
+}
+li a {
+  font-size:1.3rem;
+  color:#1F3A93;
+}
+.site-link{
+  background-color:teal;
+  color:white;  
+}
+.site-link:hover{
+  background-color:teal;
+  color:white; 
+}
+footer{
+  padding-bottom:3rem;
+}
+#testui{
+  padding-top:2rem;
+  padding-bottom:2rem;
+}

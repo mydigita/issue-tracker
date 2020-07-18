@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Issue Tracker App</title>
+    <link rel="alternate" title="Sitemap" hreflang="en" href="https://fcc-issue-tracker-thetradecoder.glitch.me" />
+    <link rel="alternate" title="Sitemap" hreflang="en" href="https://fcc-issue-tracker-thetradecoder.glitch.me/sitemap.xml" />
+    <meta name="description" content="Issue Tracker App">
+    <meta name="author" content="theTradeCoder, Mamun Abdullah">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://fcc-issue-tracker-thetradecoder.glitch.me/sitemap.xml" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="../public/style.css">
+    
+  </head>
+  <body>
+    <section class="container">
+    <header>
+      <h1 class="text-center">
+        Issue Tracker App
+      </h1>
+    </header>
+      
+      
+       <ul class="nav nav-tabs pt-2">
+        <li class="nav-item">
+          <a class="nav-link active primary" data-toggle="tab" href="#register_issue">Submit new issue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link warning" data-toggle="tab" href="#update_issue">Update issue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link danger" data-toggle="tab" href="#delete_issue">Delete issue</a>
+        </li>
+      </ul>
+      
+      
+      
+      
+      
+    <!-- main view-->
+    
+     <div id="testui" class="tab-content">
+       
+      <div id="register_issue" class="container tab-pane active">
+      <h2 style="text-align: left">API Tests:</h2>
+        <p class="text-muted">** Any issue submitted here directly will be enlisted in <code>apitest</code> project, <br>
+          *** If you want to submit issues for other project, type your project in address bar, then submit your issues. <br/>
+          *** Example: <code> https://fcc-issue-tracker-thetradecoder.glitch.me/your_porject_name_here</code>
+        </p>
+        <h3>Submit issue on : <code>apitest</code></h3>
+      <form id="testForm">
+        
+        <div class="form-group">
+        <label for="reg_issue_title">Issue title</label><br/>
+        <input id="reg_issue_title" type="text" name="issue_title" placeholder="*Title" class="form-control" required="">
+        </div>
+        
+        <div class="form-group">
+        <label for="reg_issue_text">Issue text</label><br/>
+        <textarea id="reg_issue_text" name="issue_text" placeholder="*Text" class="form-control" rows="5" required=""></textarea>
+        </div>
+         
+        <div class="form-row">
+        <div class="form-group col">
+        <label for="reg_created_by">Created by</label><br/>
+        <input id="reg_created_by" type="text" name="created_by" placeholder="*Created by" class="form-control" required="">
+        </div>
+          
+        <div class="form-group col">  
+        <label for="reg_assigned_to">Assigned to</label><br/>
+        <input id="reg_assigned_to" type="text" name="assigned_to" placeholder="(opt)Assigned to" class="form-control">
+        </div>
+        
+        <div class="form-group col">
+        <label for ="reg_status_text">Status text</label><br/>
+        <input id="reg_status_text" type="text" name="status_text" placeholder="(opt)Status text" class="form-control">
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Issue</button>
+        <a href="https://fcc-issue-tracker-thetradecoder.glitch.me/apitest" class="btn btn-success site-link">View Issues</a>
+      </form>
+       </div>
+       
+       
+       
+       
+       
+       <div id="update_issue" class="container tab-pane fade">
+      <h3>Update any issue on <code>any project</code> by issue_id</h3>
+      <form id="testForm2">
+        
+        <div class="form-group">
+        <label for="update_id">Issue ID</label><br/>
+        <input id="update_id" type="text" name="_id" placeholder="*_id" class="form-control" required="">
+        </div>
+        
+        <div class="form-group">
+        <label for="update_issue_title">Issue title</label><br/>
+        <input id="update_issue_title" type="text" name="issue_title" placeholder="(opt)Title" class="form-control">
+        </div>
+        
+        <div class="form-group">
+        <label for="update_issue_text">Issue text</label><br/>
+        <textarea id="update_issue_text" name="issue_text" placeholder="(opt)Text" class="form-control" rows="5"></textarea>
+        </div>
+        
+        <div class="form-row">
+        <div class="form-group col">
+        <label for="update_created_by">Created by</label><br/>
+        <input id="update_created_by" type="text" name="created_by" placeholder="(opt)Created by" class="form-control" disabled="disabled">
+        </div>
+        
+        <div class="form-group col">
+        <label for="update_assigned_to">Assigned to</label><br/>
+        <input id="update_assigned_to" type="text" name="assigned_to" placeholder="(opt)Assigned to" class="form-control">
+        </div>
+         
+        <div class="form-group col">
+        <label for="update_status_text">Status text</label><br/>
+        <input id="update_status_text" type="text" name="status_text" placeholder="(opt)Status text" class="form-control">
+        </div>
+        </div>
+        
+        <div class="form-group form-check">
+        <label for="close_issue" class="from-check-label">
+        <input id="close_issue" type="checkbox" name="open" value="false" class="form-check-input"> Check to close issue</label>
+        </div>
+        
+        <button type="submit" class="btn btn-warning">Update Issue</button>
+      </form>
+       </div>   
+       
+       
+       
+       
+      <div id="delete_issue" class="container tab-pane fade">
+        <h3>Delete any issue from <code>any project</code> by issue_id</h3>
+      <form id="testForm3">
+        <div class="form-group">
+        <label for="delete_issue_by_id">Delete Issue by ID</label><br/>
+        <input id="delete_issue_by_id" type="text" name="_id" placeholder="_id" class="form-control" required="">
+        </div>
+        <button type="submit" class="btn btn-danger">Delete Issue</button>
+      </form>
+      </div> 
+       
+    </div>   
+    
+      <div id="resultDiv" class="pt-5">
+      <code id="jsonResult"></code>
+      </div>
+    
+    
+    
+    
+    
+    
+    <div id="userstories">
+     
+      <h3>Example get usage:</h3><br/>
+      <code>/api/issues/{project}</code><br>
+      <code>/api/issues/{project}?open=true&amp;assigned_to=Joe</code><br/><br/>
+      <h3>Example return:</h3><br/>
+      <code>[{"_id":"5871dda29faedc3491ff93bb","issue_title":"Fix error in posting data","issue_text":"When we post data it has an error.","created_on":"2017-01-08T06:35:14.240Z","updated_on":"2017-01-08T06:35:14.240Z","created_by":"Joe","assigned_to":"Joe","open":true,"status_text":"In QA"},...]</code>
+      <br><br>
+      <h3><a href="/apitest/">Example project: Go to <i>/apitest/</i> project issues</a></h3>
+    </div>
+      
+      <footer>
+        
+      </footer>
+      
+      
+    </section>
+      <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    
+    
+    <script>
+      $(function() {
+        $('#testForm').submit(function(e) {
+          $.ajax({
+            url: '/api/issues/apitest',
+            type: 'post',
+            data: $('#testForm').serialize(),
+            success: function(data) {
+              $('#jsonResult').text(JSON.stringify(data));
+              $("form").trigger("reset");
+              
+            }
+          });
+          e.preventDefault();
+        });
+        $('#testForm2').submit(function(e) {
+          $.ajax({
+            url: '/api/issues/apitest',
+            type: 'put',
+            data: $('#testForm2').serialize(),
+            success: function(data) {
+              $('#jsonResult').text(JSON.stringify(data));
+              $("form").trigger("reset");              
+            }
+          });
+          e.preventDefault();
+        });
+        $('#testForm3').submit(function(e) {
+          $.ajax({
+            url: '/api/issues/apitest',
+            type: 'delete',
+            data: $('#testForm3').serialize(),
+            success: function(data) {
+              $('#jsonResult').text(JSON.stringify(data));
+            }
+          });
+          e.preventDefault();
+        });
+      });
+   </script>
+  </body>
+</html>
